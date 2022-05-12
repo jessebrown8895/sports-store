@@ -1,5 +1,5 @@
 class PurchaseSerializer < ActiveModel::Serializer
-  attributes :id, :quantity
+  attributes :id, :product, :quantity
   has_one :product
   has_one :user
 end

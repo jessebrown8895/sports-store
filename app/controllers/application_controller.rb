@@ -1,12 +1,14 @@
 class ApplicationController < ActionController::API
-  include ActionController::Cookies
-  
+  include ActionController::Cookies 
+  rescue_from ActiveRecord::RecordNotFound, with: :no_route 
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
-  before_action :authorize
+  # before_action :authorize
+
+  
 
   private
-
+  
   def authorize
     @current_user = User.find_by(id: session[:user_id])
 
@@ -17,4 +19,7 @@ class ApplicationController < ActionController::API
     render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
   end
 
+  def no_route
+    render json: { errors: ["Resource not found"]}, status: :unauthorized 
+  end 
 end

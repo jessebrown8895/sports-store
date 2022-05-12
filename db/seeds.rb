@@ -5,10 +5,12 @@ puts "Seeding data..."
     Purchase.connection 
     Review.connection 
 
-    User.delete_all
-    Product.delete_all
-    Purchase.delete_all
     Review.delete_all
+    Purchase.delete_all
+    Product.delete_all
+    User.delete_all
+    
+    
 
 10.times do 
     user = User.create(
@@ -24,7 +26,7 @@ puts "Seeding data..."
 
     # 10.times do 
         product = Product.create(
-            name: Faker::Commerce.prouct_name,
+            name: Faker::Commerce.product_name,
             category: Faker::Commerce.brand,
             price: Faker::Commerce.price,
             stock_quantity: Faker::Number.between(from: 1, to: 50),
@@ -37,13 +39,13 @@ puts "Seeding data..."
             purchase = Purchase.create(
                 product_id: product.id,
                 user_id: user.id,
-                quantity: Faker::Number
+                quantity: Faker::Number.between(from: 1, to: 10)
             )
     
             # 10.times do 
                 review = Review.create(
                     comment: Faker::Lorem.paragraphs(number: 3),
-                    raiting: Faker::Number.between(from: 0, to: 5),
+                    rating: Faker::Number.between(from: 0, to: 5),
                     purchase_id: purchase.id
                 )
             # end 
