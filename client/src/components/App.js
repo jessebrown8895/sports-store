@@ -1,38 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
-import NavBar from "./NavBar";
-import Login from "../pages/Login";
-import RecipeList from "../pages/RecipeList";
-import NewRecipe from "../pages/NewRecipe";
-
+import {Route, Switch} from "react-router-dom"
+import NavBar from "./NavBar"
+import Header from "./Header"
+import {useEffect} from 'react'
+import ProductsContainer from "../containers/ProductsContainer"
+import ProductForm from "./ProductForm"
 function App() {
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // auto-login
-    fetch("/api/me").then((r) => {
+    fetch('/api/me')
+    .then(r => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json()
+        .then(user => console.log(user))
+      }else {
+        r.json()
+        .then(obj => console.log(obj.error))
       }
-    });
-  }, []);
-
-  if (!user) return <Login onLogin={setUser} />;
+    })
+  }, [])
+  
 
   return (
-    <>
-      <NavBar user={user} setUser={setUser} />
-      <main>
+    <div className="App">
+     
+        <NavBar />
+        <Header slogan="Start typing away!"storename="The best athletic store"/>
         <Switch>
-          <Route path="/new">
-            <NewRecipe user={user} />
-          </Route>
-          <Route path="/">
-            <RecipeList />
+          <Route path="/products">
+            <ProductsContainer />
           </Route>
         </Switch>
-      </main>
-    </>
+    
+    </div>
   );
 }
 

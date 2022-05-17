@@ -1,59 +1,104 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { Button } from "../styles";
+import {NavLink} from 'react-router-dom'
 
-function NavBar({ user, setUser }) {
-  function handleLogoutClick() {
-    fetch("/api/logout", { method: "DELETE" }).then((r) => {
-      if (r.ok) {
-        setUser(null);
-      }
-    });
-  }
+const NavBar = () => {
+
+    const style = {
+      width: "60%",
+      margin: "5% 0 1%",
+      padding: "1em",
+      textDecoration: "none",
+      color: "black",
+      backgroundColor: "rgb(2555, 120, 44)",
+      fontWeight: "bold",
+      verticalAlign: "center",
+    };
 
   return (
-    <Wrapper>
-      <Logo>
-        <Link to="/">Reciplease</Link>
-      </Logo>
-      <Nav>
-        <Button as={Link} to="/new">
-          New Recipe
-        </Button>
-        <Button variant="outline" onClick={handleLogoutClick}>
-          Logout
-        </Button>
-      </Nav>
-    </Wrapper>
+    <div>
+      <NavLink
+        activeStyle={{
+          fontWeight: "bolder",
+          color: "red",
+        }}
+        exact
+        style={style}
+        to="/"
+      >
+        Home
+      </NavLink>
+      <NavLink
+        activeStyle={{
+          fontWeight: "bolder",
+          color: "red",
+        }}
+        exact
+        style={style}
+        to="/products"
+      >
+        Products
+      </NavLink>
+
+      <NavLink
+        activeStyle={{
+          fontWeight: "bolder",
+          color: "red",
+        }}
+        exact
+        style={style}
+        to="/products/new"
+      >
+        Create Product
+      </NavLink>
+      
+      <NavLink
+        activeStyle={{
+          fontWeight: "bolder",
+          color: "red",
+        }}
+        exact
+        style={style}
+        to="/profile"
+      >
+        Profile
+      </NavLink>
+      <NavLink
+        activeStyle={{
+          fontWeight: "bolder",
+          color: "red",
+        }}
+        exact
+        style={style}
+        to="/signout"
+      >
+        Sign Out
+      </NavLink>
+        <>
+          <NavLink
+            activeStyle={{
+              fontWeight: "bolder",
+              color: "red",
+            }}
+            exact
+            style={style}
+            to="/signin"
+          >
+            Sign In
+          </NavLink>
+          <NavLink
+            activeStyle={{
+              fontWeight: "bolder",
+              color: "red",
+            }}
+            exact
+            style={style}
+            to="/signup"
+          >
+            Sign Up
+          </NavLink>
+          
+        </>
+    </div>
   );
 }
 
-const Wrapper = styled.header`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px;
-`;
-
-const Logo = styled.h1`
-  font-family: "Permanent Marker", cursive;
-  font-size: 3rem;
-  color: deeppink;
-  margin: 0;
-  line-height: 1;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  gap: 4px;
-  position: absolute;
-  right: 8px;
-`;
-
-export default NavBar;
+export default NavBar

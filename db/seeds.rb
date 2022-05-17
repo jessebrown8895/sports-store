@@ -11,6 +11,7 @@ puts "Seeding data..."
     User.delete_all
     
     
+User.create(first_name: "Jesse", last_name: "Brown", address: "something", age: 26, email: "Brownjesse8895@yahoo.com", password: "test", username: "jdb1995", role: 1)
 
 10.times do 
     user = User.create(
