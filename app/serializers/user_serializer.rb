@@ -1,7 +1,7 @@
 class UserSerializer < ActiveModel::Serializer
   attributes :id, :full_name, :address, :age, :email, :username
     has_many :purchases 
-    has_many :created_products, class_name: "Product", foreign_key: :creator_id
+    has_many :created_products
     
     has_many :reviews, through: :purchases
 

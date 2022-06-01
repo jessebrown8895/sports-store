@@ -1,11 +1,11 @@
 import React from 'react'
 import ProductCard from './ProductCard'
-const ProductList = ({pradas}) => {
+const ProductList = ({pradas, user, setPrada}) => {
   
-    const renderPosts = pradas.map(product => <ProductCard key={product.id} product={product} />)
+    const renderProduct = pradas.map(product => <ProductCard key={product.id} setPrada={setPrada} user={user} product={product} />)
   return (
     <div>
-      {renderPosts}
+      {renderProduct}
     </div>
   )
 }

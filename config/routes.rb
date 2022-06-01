@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     delete "/logout", to: "sessions#destroy"
    
     resources :reviews
-    resources :products, only: [:index, :show]
+    resources :products
     resources :purchases, only: [:show]
     resources :users, only: [:index, :create]
   end
@@ -16,5 +16,5 @@ Rails.application.routes.draw do
   # - constraints:
   #   - !req.xhr?: it's not a XHR (fetch) request
   #   - req.format.html?: it's a request for a HTML document
-  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+  # get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 end

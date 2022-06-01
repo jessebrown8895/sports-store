@@ -1,6 +1,6 @@
 import {NavLink} from 'react-router-dom'
 
-const NavBar = () => {
+const NavBar = ({user, setUser}) => {
 
     const style = {
       width: "60%",
@@ -12,7 +12,16 @@ const NavBar = () => {
       fontWeight: "bold",
       verticalAlign: "center",
     };
-
+    const handleLogOut = () => {
+      fetch("/api/logout", {
+        method: "DELETE"
+      })
+      .then((r) => {
+        if (r.ok) {
+          setUser(null)
+        }
+      })
+    }
   return (
     <div>
       <NavLink
@@ -49,7 +58,7 @@ const NavBar = () => {
       >
         Create Product
       </NavLink>
-      
+
       <NavLink
         activeStyle={{
           fontWeight: "bolder",
@@ -69,34 +78,27 @@ const NavBar = () => {
         exact
         style={style}
         to="/signout"
+        onClick={handleLogOut}
       >
         Sign Out
       </NavLink>
-        <>
-          <NavLink
-            activeStyle={{
-              fontWeight: "bolder",
-              color: "red",
-            }}
-            exact
-            style={style}
-            to="/signin"
-          >
-            Sign In
-          </NavLink>
-          <NavLink
-            activeStyle={{
-              fontWeight: "bolder",
-              color: "red",
-            }}
-            exact
-            style={style}
-            to="/signup"
-          >
-            Sign Up
-          </NavLink>
-          
-        </>
+      <>
+        {!user ? (
+          <>
+            <NavLink
+              activeStyle={{
+                fontWeight: "bolder",
+                color: "red",
+              }}
+              exact
+              style={style}
+              to="/signup"
+            >
+              Sign Up
+            </NavLink>
+          </>
+        ) : null}
+      </>
     </div>
   );
 }
