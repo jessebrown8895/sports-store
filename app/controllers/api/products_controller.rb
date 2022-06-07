@@ -17,7 +17,8 @@ class Api::ProductsController < ApplicationController
     end 
 
     def update 
-        Product.update(params[:id], product_params)
+        product = Product.find_by_id(params[:id])
+        product.update(product_params)
     end
     
     def destroy

@@ -30,8 +30,11 @@ const EditForm = ({ user }) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: product.id,
         name: product.name,
+        category: product.category,
+        price: product.price,
+        stock: product.stock_quantity,
+        description: product.description
       })
       
     });

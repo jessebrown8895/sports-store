@@ -23,7 +23,7 @@ const Login = ({setUser, user}) => {
         });
         
       } else {
-          r.json.then(error => alert(error.error))
+          r.json().then(error => alert(error.error))
       }
       
     });

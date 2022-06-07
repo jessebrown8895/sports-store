@@ -1,5 +1,3 @@
-import { useHistory } from 'react-router-dom'
-
 const DeleteButton = ({product, setPrada}) => {
     
     const handleDelete = () => {

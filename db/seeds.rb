@@ -13,7 +13,7 @@ puts "Seeding data..."
     
 User.create(first_name: "Jesse", last_name: "Brown", address: "something", age: 26, email: "Brownjesse8895@yahoo.com", password: "test", username: "jdb1995", role: 1)
 
-10.times do 
+2.times do 
     user = User.create(
         first_name: Faker::Name.first_name, 
         last_name: Faker::Name.last_name,
@@ -25,7 +25,7 @@ User.create(first_name: "Jesse", last_name: "Brown", address: "something", age: 
         role: 1
     )
 
-    # 10.times do 
+    2.times do 
         product = Product.create(
             name: Faker::Commerce.product_name,
             category: Faker::Commerce.brand,
@@ -36,21 +36,21 @@ User.create(first_name: "Jesse", last_name: "Brown", address: "something", age: 
             creator_id: user.id
         )
     
-        # 10.times do 
+        2.times do 
             purchase = Purchase.create(
                 product_id: product.id,
                 user_id: user.id,
                 quantity: Faker::Number.between(from: 1, to: 10)
             )
     
-            # 10.times do 
+            2.times do 
                 review = Review.create(
                     comment: Faker::Lorem.paragraphs(number: 3),
                     rating: Faker::Number.between(from: 0, to: 5),
                     purchase_id: purchase.id
                 )
-            # end 
-        # end
-    # end
+            end 
+        end
+    end
 end 
 

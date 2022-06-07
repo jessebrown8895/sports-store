@@ -7,7 +7,7 @@ Rails.application.routes.draw do
    
     resources :reviews
     resources :products
-    resources :purchases, only: [:show]
+    resources :purchases, only: [:index, :show, :create]
     resources :users, only: [:index, :create]
   end
   # all other routes will be load our React application
