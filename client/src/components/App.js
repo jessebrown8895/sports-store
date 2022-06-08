@@ -7,9 +7,10 @@ import ProductsContainer from "../containers/ProductsContainer"
 import ProductForm from "./ProductForm"
 import SignUpForm from "./SignUpForm"
 import EditForm from './EditForm'
-
+import Home from './Home'
 function App() {
   const [user, setUser] = useState()
+  const [pradas, setPrada] = useState([]);
   const history = useHistory()
   useEffect(() => {
     fetch("/api/me")
@@ -25,25 +26,28 @@ function App() {
 
   return (
     <div className="App">
-      {user&& <NavBar user={user} setUser={setUser} />}
+      {user && <NavBar user={user} setUser={setUser} />}
       <Switch>
+        <Route path="/home">
+          <Home />
+        </Route>
         <Route path="/products/new">
           <ProductForm />
         </Route>
         <Route exact path="/products">
-          <ProductsContainer user={user} />
+          <ProductsContainer user={user} pradas={pradas} setPrada={setPrada} />
         </Route>
         <Route path="/profile">
           <Profile user={user} />
         </Route>
         <Route path="/login">
-          <Login setUser={setUser} user={user}/>
+          <Login setUser={setUser} user={user} />
         </Route>
         <Route path="/signup">
-          <SignUpForm setUser={setUser}/>
+          <SignUpForm setUser={setUser} />
         </Route>
         <Route exact path="/products/:id">
-          <EditForm />
+          <EditForm setPrada={setPrada} />
         </Route>
       </Switch>
     </div>

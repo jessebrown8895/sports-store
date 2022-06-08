@@ -19,7 +19,7 @@ const Login = ({setUser, user}) => {
           console.log(r)
         r.json().then(user => {
             setUser(user);
-            history.push("/products");
+            history.push("/home");
         });
         
       } else {

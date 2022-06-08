@@ -24,6 +24,7 @@ const NavBar = ({user, setUser}) => {
     }
   return (
     <div>
+      
       <NavLink
         activeStyle={{
           fontWeight: "bolder",
@@ -31,7 +32,7 @@ const NavBar = ({user, setUser}) => {
         }}
         exact
         style={style}
-        to="/"
+        to="/home"
       >
         Home
       </NavLink>

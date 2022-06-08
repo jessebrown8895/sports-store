@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-const EditForm = ({ user }) => {
+const EditForm = ({setPrada}) => {
   const params = useParams();
   const history = useHistory()
   const [product, setProduct] = useState();
 
   useEffect(() => {
-    fetch(`/api/products/${parseInt(params.id)}`)
+    fetch(`/api/products/${params.id}`)
       .then((r) => r.json())
       .then((data) => setProduct(data));
   }, []);
@@ -24,7 +24,7 @@ const EditForm = ({ user }) => {
       alert("Please fill in all the information please!");
       return false;
     }
-    fetch(`/api/products/${parseInt(params.id)}`, {
+    fetch(`/api/products/${params.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -35,9 +35,19 @@ const EditForm = ({ user }) => {
         price: product.price,
         stock: product.stock_quantity,
         description: product.description
-      })
+      })}).then((r) => {if(r.ok) { 
+        setPrada(products => {
+          const newProducts = [...products] 
+          const prod = newProducts.filter((prod) => prod.id === parseInt(params.id) )[0]
+          prod.name = product.name
+          prod.category = product.category
+          prod.stock = product.stock_quantity 
+          prod.description = product.description
+          return newProducts
+        })
+      }})
       
-    });
+    
     history.push('/products')
   };
 

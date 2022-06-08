@@ -41,7 +41,7 @@ const SignUpForm = ({setUser}) => {
                   console.log(r);
                   r.json().then((user) => {
                     setUser(user);
-                    history.push("/products");
+                    history.push("/home");
                   });
                 } else {
                   r.json().then((error) => alert(error.error));

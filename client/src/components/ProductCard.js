@@ -3,12 +3,12 @@ import { useHistory } from 'react-router-dom'
 import DeleteButton from './DeleteButton';
 import PurchaseProduct from './PurchaseProduct';
 const ProductCard = ({product, user, setPrada}) => {
-    const editHistory = useHistory();
+    const history = useHistory();
 
    
   
     const handleEdit = () => {
-      editHistory.push(`/products/${product.id}`)
+      history.push(`/products/${product.id}`)
     }
     
   return (
