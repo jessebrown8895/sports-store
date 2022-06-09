@@ -11,7 +11,7 @@ const Profile = ({ user }) => {
           <li key={purchase.id}>{purchase.product_name}</li>
         ))}
       </ul>
-      <h5>total Unique products purchased: {user.total_product_purchases}</h5>
+      <h5>total Unique products purchased: {user?.total_product_purchases}</h5>
     </div>
   );
 };

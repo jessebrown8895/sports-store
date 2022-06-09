@@ -31,9 +31,6 @@ function App() {
     <div className="App">
       {user && <NavBar user={user} setUser={setUser} />}
       <Switch>
-        <Route path="/home">
-          <Home />
-        </Route>
         <Route path="/products/new">
           <ProductForm />
         </Route>
@@ -56,6 +53,9 @@ function App() {
         </Route>
         <Route exact path="/products/:id">
           <EditForm setPrada={setPrada} />
+        </Route>
+        <Route path="">
+          <Home />
         </Route>
       </Switch>
     </div>
