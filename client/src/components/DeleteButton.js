@@ -1,11 +1,10 @@
-const DeleteButton = ({product, setPrada}) => {
+const DeleteButton = ({product, getAllProducts}) => {
     
     const handleDelete = () => {
         fetch(`/api/products/${product.id}`, {
-            method: "DELETE"
-        })
+          method: "DELETE",
+        }).then(() => getAllProducts());
         
-        .then(() => setPrada(products => products.filter((p) => p.id !== product.id)))
         
     }
     

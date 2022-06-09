@@ -11,15 +11,18 @@ import Home from './Home'
 function App() {
   const [user, setUser] = useState()
   const [pradas, setPrada] = useState([]);
+  
   const history = useHistory()
-  useEffect(() => {
-    fetch("/api/me")
-    .then(r => {
-      if(r.status === 200) {
-        r.json()
-        .then((data) => setUser(data))
+  
+  const getCurrentUser = () => {
+    fetch("/api/me").then((r) => {
+      if (r.status === 200) {
+        r.json().then((data) => setUser(data));
       }
-    })
+    });
+  }
+  useEffect(() => {
+    getCurrentUser();
   }, [])
   
   if (!user) history.push('/login')
@@ -35,7 +38,12 @@ function App() {
           <ProductForm />
         </Route>
         <Route exact path="/products">
-          <ProductsContainer user={user} pradas={pradas} setPrada={setPrada} />
+          <ProductsContainer
+            user={user}
+            pradas={pradas}
+            setPrada={setPrada}
+            getCurrentUser={getCurrentUser}
+          />
         </Route>
         <Route path="/profile">
           <Profile user={user} />

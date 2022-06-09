@@ -4,6 +4,7 @@ class Api::PurchasesController < ApplicationController
         render json: purchases
     end 
     def show 
+        product = Product.find(prams[:id])
         purchase = Purchase.find(params[:id])
         render json: purchase
     end
