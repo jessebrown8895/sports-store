@@ -48,7 +48,7 @@ const EditForm = ({setPrada}) => {
       }})
       
     
-    history.push('/products')
+    history.push('/home')
   };
 
   return (

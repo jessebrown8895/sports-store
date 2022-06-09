@@ -9,6 +9,7 @@ const ProductCard = ({product, user,getAllProducts, getCurrentUser}) => {
   const handleEdit = () => {
     history.push(`/products/${product.id}`);
   };
+  
 
   return (
     <div>
