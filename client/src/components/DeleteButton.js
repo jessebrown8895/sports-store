@@ -1,9 +1,9 @@
-const DeleteButton = ({product, getAllProducts}) => {
+const DeleteButton = ({}) => {
     
     const handleDelete = () => {
         fetch(`/api/products/${product.id}`, {
           method: "DELETE",
-        }).then(() => getAllProducts());
+        }).then(() => );
         
         
     }

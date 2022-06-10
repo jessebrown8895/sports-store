@@ -12,13 +12,14 @@ class Api::ProductsController < ApplicationController
     end 
 
     def create
-       product = @current_user.created_products.create!(product_params)
+       product = @current_user.created_products.create!(product_params )
         render json: product, status: 201
     end 
 
     def update 
-        product = Product.find_by_id(params[:id])
-        product.update(product_params)
+        product = Product.find(params[:id])
+        product&.update!(product_params)
+        rendeer json: product, status: 201
     end
     
     def destroy

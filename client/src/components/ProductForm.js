@@ -1,8 +1,8 @@
 import React, {useState} from 'react'
 import {useHistory} from 'react-router-dom'
 
-const ProductForm = () => {
-  const history = useHistory()
+const ProductForm = ({user, setPrada}) => {
+  const history = useHistory();
 
   const [product, setProduct] = useState({
     name: "",
@@ -10,29 +10,57 @@ const ProductForm = () => {
     price: "",
     stock_quantity: "",
     description: "",
-  })
-  const handleSubmit = e => {
-    e.preventDefault()
-    if([product.name, product.category, product.price, product.stock_quantity, product.description].some(val => val.trim() === "")){
-      alert(("Please fill in all the information please!"))
-      return false 
+  });
+
+  
+
+  const handleChange = (e) => {
+    setProduct({ ...product, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (
+      [
+        product.name,
+        product.category,
+        product.price,
+        product.stock_quantity,
+        product.description,
+      ].some((val) => val.trim() === "")
+    ) {
+      alert("Please fill in all the information please!");
+      return false;
     }
 
     fetch("/api/products", {
-      method: "POST", 
-      headers: { 
-        "Content-Type": "application/json"
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(product)
+      body: JSON.stringify({
+        name: product.name,
+        category: product.category,
+        price: product.price,
+        stock_quantity: product.stock_quantity,
+        description: product.description,
+      }),
     })
-    .then(() => history.push("/products"))
-  }
+      .then((r) => {
+        if (r.ok) {
+          r.json().then((product) => {
+            setPrada(orgProducts => orgProducts.concat(product) )
+            history.push("/products");
+        
+          });
+        } else {
+          r.json().then((error) => alert(error.error));
+        }
+      })
+      .catch((error) => alert(error.error));
+      
+  };
 
-  const handleChange = (e) => {
-    setProduct({...product, [e.target.name]: e.target.value})
-  }
-
-  
   return (
     <div>
       <h3>Create a new prouduct</h3>
@@ -83,6 +111,6 @@ const ProductForm = () => {
       </form>
     </div>
   );
-}
+};
 
 export default ProductForm

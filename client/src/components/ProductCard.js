@@ -1,36 +1,51 @@
-import React, {useState} from 'react'
-import { useHistory } from 'react-router-dom'
+import {useEffect, useState} from 'react'
+import { useParams, useLocation } from 'react-router-dom';
 import DeleteButton from './DeleteButton';
 import PurchaseProduct from './PurchaseProduct';
-const ProductCard = ({product, user,getAllProducts, getCurrentUser}) => {
-  const history = useHistory();
-  
+import EditForm from './EditForm';
+const ProductCard = ({product, user, getCurrentUser, setPrada}) => {
+  const {id} = useParams()
+  const location = useLocation()
+  const [edit, setEdit] = useState(false)
+  const [productObj, setProductObj] = useState(null)
 
-  const handleEdit = () => {
-    history.push(`/products/${product.id}`);
-  };
-  
+  useEffect(() => {
+    if(!product) {
+      fetch(`/api/products/${id}`)
+      .then((r) => r.json())
+      .then((product) => setProductObj(product));
+    }
+  }, [product, id]);
+  const handleUpdate = (updatedProduct) => {
+    setProductObj(updatedProduct)
+  }
+  const finalProduct = product ? product : productObj
+  if(!finalProduct) return "loading..."
 
   return (
     <div>
-      <h1>Product name: {product.name}</h1>
-      <h2>category: {product.category}</h2>
-      <h3>price: {product.price}</h3>
-      <h4>in stock: {product.stock_quantity}</h4>
-      <h3>{product.description}</h3>
+      {/* {!edit ? (
+        <>
+        <EditForm productObj={finalProduct} handleUpdate={handleUpdate}/>
+        </>
+      ) } */}
+      <h1>Product name: {finalProduct.name}</h1>
+      <h2>category: {finalProduct.category}</h2>
+      <h3>price: {finalProduct.price}</h3>
+      <h4>in stock: {finalProduct.stock_quantity}</h4>
+      <h3>{finalProduct.description}</h3>
 
-      <h3>Total users purchased product: {product.total_users}</h3>
+      <h3>Total users purchased product: {finalProduct.total_users}</h3>
 
-      {product.creator.id === user.id && (
-        <button onClick={handleEdit}>Edit product</button>
+      {finalProduct.creator.id === user.id && (
+        <button onClick={() => setEdit((edit) => !edit )}></button>
       )}
-      {product.creator.id === user.id && (
-        <DeleteButton product={product} getAllProducts={getAllProducts} />
+      {finalProduct.creator.id === user.id && (
+        <DeleteButton product={finalProduct} setPrada={setPrada/>
       )}
-      {product.creator.id !== user.id && (
+      {finalProduct.creator.id !== user.id && (
         <PurchaseProduct
-          getAllProducts={getAllProducts}
-          product={product}
+          product={finalProduct}
           user={user}
           getCurrentUser={getCurrentUser}
         />

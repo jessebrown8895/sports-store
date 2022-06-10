@@ -9,21 +9,28 @@ import SignUpForm from "./SignUpForm"
 import EditForm from './EditForm'
 import Home from './Home'
 function App() {
+  const history = useHistory()
   const [user, setUser] = useState()
   const [pradas, setPrada] = useState([]);
   
-  const history = useHistory()
+  useEffect(() => {
+    getCurrentUser()
+    fetch("/api/products")
+      .then((r) => r.json())
+      .then((data) => setPrada(data))
+      .catch((error) => alert(error));
+  }, [])
+
   
   const getCurrentUser = () => {
     fetch("/api/me").then((r) => {
       if (r.status === 200) {
-        r.json().then((data) => setUser(data));
+        r.json().then((data) => setUser(data))
       }
     });
   }
-  useEffect(() => {
-    getCurrentUser();
-  }, [])
+  
+  
   
   if (!user) history.push('/login')
 
@@ -32,7 +39,7 @@ function App() {
       {user && <NavBar user={user} setUser={setUser} />}
       <Switch>
         <Route path="/products/new">
-          <ProductForm />
+          <ProductForm setPrada={setPrada} user={user} />
         </Route>
         <Route exact path="/products">
           <ProductsContainer
@@ -52,7 +59,7 @@ function App() {
           <SignUpForm setUser={setUser} />
         </Route>
         <Route exact path="/products/:id">
-          <EditForm setPrada={setPrada} />
+          <EditForm user={user} />
         </Route>
         <Route path="">
           <Home />

@@ -12,7 +12,7 @@ const PurchaseProduct = ({product, user, getAllProducts, getCurrentUser}) => {
           body: JSON.stringify({product_id: product.id, user_id: user.id,
             quantity: 1,
           }),
-        }).then(r => {if(r.ok){getAllProducts() ; getCurrentUser();}})
+        }).then(r => {if(r.ok){getAllProducts() ; getCurrentUser()}})
         
           
        

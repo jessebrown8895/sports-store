@@ -1,10 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-const EditForm = ({setPrada}) => {
-  const params = useParams();
-  const history = useHistory()
-  const [product, setProduct] = useState();
+const EditForm = ({ productObj, handleUpdate }) => {
 
+  
+  const params = useParams();
+  const history = useHistory();
+  const [product, setProduct] = useState({
+    name: productObj.name,
+    category: productObj.category,
+    price: productObj.price,
+    stock_quantity: productObj.stock_quantity,
+    description: productObj.description,
+  });
+
+  const editProduct = {
+    name: product.name,
+    category: product.category,
+    price: product.price,
+    stock_quantity: product.stock_quantity,
+    description: product.description,
+  };
   useEffect(() => {
     fetch(`/api/products/${params.id}`)
       .then((r) => r.json())
@@ -29,26 +44,29 @@ const EditForm = ({setPrada}) => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        name: product.name,
-        category: product.category,
-        price: product.price,
-        stock: product.stock_quantity,
-        description: product.description
-      })}).then((r) => {if(r.ok) { 
-        setPrada(products => {
-          const newProducts = [...products] 
-          const prod = newProducts.filter((prod) => prod.id === parseInt(params.id) )[0]
-          prod.name = product.name
-          prod.category = product.category
-          prod.stock = product.stock_quantity 
-          prod.description = product.description
-          return newProducts
-        })
-      }})
-      
-    
-    history.push('/home')
+      body: JSON.stringify({editProduct}),
+    // }).then((r) => {
+    //   if (r.ok) {
+    //     setPrada((products) => {
+    //       const newProducts = [...products];
+    //       const prod = newProducts.filter(
+    //         (prod) => prod.id === parseInt(params.id)
+    //       )[0];
+    //       prod.name = product.name;
+    //       prod.category = product.category;
+    //       prod.stock = product.stock_quantity;
+    //       prod.description = product.description;
+    //       return newProducts;
+    //     });
+    //   }
+    }).then((r) => {
+      if(r.ok) {
+        r.json().then((data) => handleUpdate(data))
+        history.push("/products");
+      }else {
+        r.json().then((error) => alert(error.error))
+      }
+    }).catch((error) => alert(error.error))
   };
 
   return (
@@ -58,7 +76,7 @@ const EditForm = ({setPrada}) => {
         <input
           type="text"
           name="name"
-          value={product?.name}
+          value={product.name}
           onChange={handleChange}
         />
         <br />
@@ -66,7 +84,7 @@ const EditForm = ({setPrada}) => {
         <input
           type="text"
           name="category"
-          value={product?.category}
+          value={product.category}
           onChange={handleChange}
         />
         <br />
@@ -75,7 +93,7 @@ const EditForm = ({setPrada}) => {
           type="number"
           name="price"
           step="0.01"
-          value={product?.price}
+          value={product.price}
           onChange={handleChange}
         />
         <br />
@@ -84,7 +102,7 @@ const EditForm = ({setPrada}) => {
           type="number"
           name="stock_quantity"
           step="1"
-          value={product?.stock_quantity}
+          value={product.stock_quantity}
           onChange={handleChange}
         />
         <br />
@@ -92,7 +110,7 @@ const EditForm = ({setPrada}) => {
         <input
           type="text"
           name="description"
-          value={product?.description}
+          value={product.description}
           onChange={handleChange}
         />
         <br />
