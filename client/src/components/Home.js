@@ -3,6 +3,8 @@ import React from 'react'
 const Home = () => {
   return (
     <div>
+        <br></br>
+        <br></br>
         <h1>Everyones favorite Ecomerce app</h1>
         <ul>
             <li>Grow your wealth through selling products</li>

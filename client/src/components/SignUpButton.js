@@ -1,11 +1,12 @@
 import { useHistory } from "react-router-dom";
+import Button from "../styles/Button";
 const SignUpButton = () => {
     const history = useHistory()
     
     
   return (
     <div>
-      <button onClick={() => history.push("/signup")}>Sign up</button>
+      <Button onClick={() => history.push("/signup")}>Sign up</Button>
     </div>
   );
 }

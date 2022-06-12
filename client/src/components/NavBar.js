@@ -1,5 +1,6 @@
-import {NavLink} from 'react-router-dom'
-
+import {Link} from 'react-router-dom'
+import styled from 'styled-components'
+import Button from '../styles/Button';
 const NavBar = ({user, setUser}) => {
 
     const style = {
@@ -24,84 +25,40 @@ const NavBar = ({user, setUser}) => {
     }
   return (
     <div>
-      
-      <NavLink
-        activeStyle={{
-          fontWeight: "bolder",
-          color: "red",
-        }}
-        exact
-        style={style}
-        to="/home"
-      >
-        Home
-      </NavLink>
-      <NavLink
-        activeStyle={{
-          fontWeight: "bolder",
-          color: "red",
-        }}
-        exact
-        style={style}
-        to="/products"
-      >
-        Products
-      </NavLink>
+      <Nav>
+        <Button as={Link} to="/home">
+          Home
+        </Button>
+        <Button as={Link} to="/products">
+          Products
+        </Button>
+        <Button as={Link} to="/products/new">
+          Create Product
+        </Button>
+        <Button as={Link} to="/profile">
+          Profile
+        </Button>
+        <Button onClick={handleLogOut}>Sign Out</Button>
+      </Nav>
 
-      <NavLink
-        activeStyle={{
-          fontWeight: "bolder",
-          color: "red",
-        }}
-        exact
-        style={style}
-        to="/products/new"
-      >
-        Create Product
-      </NavLink>
-
-      <NavLink
-        activeStyle={{
-          fontWeight: "bolder",
-          color: "red",
-        }}
-        exact
-        style={style}
-        to="/profile"
-      >
-        Profile
-      </NavLink>
-      <NavLink
-        activeStyle={{
-          fontWeight: "bolder",
-          color: "red",
-        }}
-        exact
-        style={style}
-        to="/signout"
-        onClick={handleLogOut}
-      >
-        Sign Out
-      </NavLink>
       <>
         {!user ? (
           <>
-            <NavLink
-              activeStyle={{
-                fontWeight: "bolder",
-                color: "red",
-              }}
-              exact
-              style={style}
-              to="/signup"
-            >
-              Sign Up
-            </NavLink>
+    
+              <Button as={Link} to="/signup">
+                Sign Up
+              </Button>
+            
           </>
         ) : null}
       </>
     </div>
   );
 }
-
+const Nav = styled.nav`
+  display: flex;
+  gap: 4px;
+  position: absolute;
+  right: 8px;
+`;
 export default NavBar

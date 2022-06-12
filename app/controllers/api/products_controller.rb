@@ -19,7 +19,7 @@ class Api::ProductsController < ApplicationController
     def update 
         product = Product.find(params[:id])
         product&.update!(product_params)
-        rendeer json: product, status: 201
+        render json: product, status: 201
     end
     
     def destroy

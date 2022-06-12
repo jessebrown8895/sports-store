@@ -1,6 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import SignUpButton from "./SignUpButton";
+import Button from "../styles/Button";
 const Login = ({setUser, user}) => {
   const history = useHistory();
   const [username, setUsername] = useState();
@@ -52,7 +53,7 @@ const Login = ({setUser, user}) => {
           onChange={(e) => setPassword(e.target.value)}
         />
         <br />
-        <input type="submit" value="Login" />
+        <Button onClick={handleSubmit}>Login</Button>
       </form>
       <SignUpButton />
         </>) : history.push("/")}
