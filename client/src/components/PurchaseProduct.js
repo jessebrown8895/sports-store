@@ -29,16 +29,16 @@ const PurchaseProduct = ({ product, setPrada, user, setUser}) => {
               console.log(newProducts)
               return newProducts
             })
-            const newUser = user
-            const newProduct = newUser.purchases.find((product) => {
-              return product.name === data.name;
-            });
-            newUser.purchases.push(data)
-            if (newProduct === undefined) {
-              newUser.total_product_purchases += 1;
+            // const newUser = user
+            // const newProduct = newUser.purchases.find((product) => {
+            //   return product.name === data.name;
+            // });
+            // newUser.purchases.push(data)
+            // if (newProduct === undefined) {
+            //   newUser.total_product_purchases += 1;
 
-            }
-            setUser(newUser);
+            // }
+            // setUser(newUser);
           })
       }
     });

@@ -49,6 +49,7 @@ const ProductForm = ({user, setPrada}) => {
       .then((r) => {
         if (r.ok) {
           r.json().then((product) => {
+            
             setPrada(orgProducts => orgProducts.concat(product) )
             history.push("/products");
         

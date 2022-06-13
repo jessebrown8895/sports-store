@@ -10,10 +10,6 @@ class Api::PurchasesController < ApplicationController
     end
 
     def create 
-        # purchase = Purchase.create(purchase_params)
-        # if purchase
-        #     render json: purchase, status: :created, location: purchase
-        # end
         product = Product.find(params[:product_id])
         purchase = @current_user.purchases.create(product: product, user_id: params[:user_id], product_id: params[:product_id], quantity: params[:quantity])
         render json: purchase, status: :created

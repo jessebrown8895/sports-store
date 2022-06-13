@@ -20,7 +20,7 @@ const ProductCard = ({product, user, setPrada, setUser}) => {
   
 
   const handleEdit = () => {
-      history.push(`/products/${product.id}`)
+      history.push(`/products/${product.id}/edit`)
     }
    
   // const handleUpdate = (updateProductObj) => {

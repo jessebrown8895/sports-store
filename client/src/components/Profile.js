@@ -1,8 +1,10 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 
-const Profile = ({ user }) => {
-  console.group(user)
-console.log(user)
+const Profile = ({ user, getCurrentUser, setUser  }) => {
+    useEffect(() => {
+      getCurrentUser()
+    }, [getCurrentUser])
+    
   return (
     <div>
       <h1>Products purchased: </h1>

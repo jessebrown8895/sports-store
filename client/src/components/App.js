@@ -44,7 +44,7 @@ function App() {
      
       <Switch>
         <Route path="/products/new">
-          <ProductForm setPrada={setPrada} user={user} />
+          <ProductForm setPrada={setPrada} user={user} pradas={pradas} />
         </Route>
         <Route exact path="/products">
           <ProductsContainer
@@ -56,7 +56,7 @@ function App() {
           />
         </Route>
         <Route path="/profile">
-          <Profile user={user}  />
+          <Profile user={user}  getCurrentUser={getCurrentUser} setUser={setUser}/>
         </Route>
         <Route path="/login">
           <Login setUser={setUser} user={user} />
@@ -64,7 +64,7 @@ function App() {
         <Route path="/signup">
           <SignUpForm setUser={setUser} />
         </Route>
-        <Route exact path="/products/:id">
+        <Route exact path="/products/:id/edit">
           <EditForm user={user} pradas={pradas} setPrada={setPrada}/>
         </Route>
         <Route path="">
