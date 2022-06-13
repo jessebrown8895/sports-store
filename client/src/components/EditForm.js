@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-const EditForm = ({ setPrada }) => {
+const EditForm = ({ setPrada, pradas }) => {
   const params = useParams();
   const history = useHistory();
   const [product, setProduct] = useState();
@@ -38,17 +38,15 @@ const EditForm = ({ setPrada }) => {
       }),
     }).then((r) => {
       if (r.ok) {
-        setPrada((products) => {
-          const newProducts = [...products];
+          const newProducts = [...pradas];
           const prod = newProducts.filter(
-            (prod) => prod.id === parseInt(params.id)
-          )[0];
+            (prods) => prods.id === parseInt(params.id)
+          )[0]
           prod.name = product.name;
           prod.category = product.category;
           prod.stock = product.stock_quantity;
           prod.description = product.description;
-          return newProducts;
-        });
+          setPrada(newProducts)
       }
     });
 

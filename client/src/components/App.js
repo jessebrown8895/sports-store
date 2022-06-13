@@ -15,11 +15,15 @@ function App() {
   
   useEffect(() => {
     getCurrentUser()
+  }, [])
+
+  useEffect(() => {
     fetch("/api/products")
       .then((r) => r.json())
       .then((data) => setPrada(data))
       .catch((error) => alert(error));
-  }, [])
+  }, [user])
+  
 
   
   const getCurrentUser = () => {
@@ -45,13 +49,14 @@ function App() {
         <Route exact path="/products">
           <ProductsContainer
             user={user}
+            setUser={setUser}
             pradas={pradas}
             setPrada={setPrada}
             getCurrentUser={getCurrentUser}
           />
         </Route>
         <Route path="/profile">
-          <Profile user={user} />
+          <Profile user={user}  />
         </Route>
         <Route path="/login">
           <Login setUser={setUser} user={user} />
@@ -60,7 +65,7 @@ function App() {
           <SignUpForm setUser={setUser} />
         </Route>
         <Route exact path="/products/:id">
-          <EditForm user={user} setPrada={setPrada}/>
+          <EditForm user={user} pradas={pradas} setPrada={setPrada}/>
         </Route>
         <Route path="">
           <Home />
