@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import ProductCard from './ProductCard'
 const ProductList = ({ pradas, user, getCurrentUser, setPrada, setUser }) => {
+  const [names, setNames] = useState("")
+  
   const renderProduct = pradas.map((product) => (
     <ProductCard
       key={product.id}
@@ -11,7 +13,25 @@ const ProductList = ({ pradas, user, getCurrentUser, setPrada, setUser }) => {
       setUser={setUser}
     />
   ));
-  return <div>{renderProduct}</div>;
+    
+    
+    
+  const handleSubmit = (e) => {
+    fetch(`/api/names?name=${names}`)
+      .then((r) => r.json())
+      .then((filter) => {
+      
+        setPrada(filter);
+      });
+
+  };
+  useEffect(() => {
+    handleSubmit();
+  }, [names]);
+  return <div>
+    <input type="text" onChange={e => setNames(e.target.value)} value={names} />
+    {renderProduct}
+    </div>;
 };
 
 export default ProductList

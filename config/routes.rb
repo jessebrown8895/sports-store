@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     get "/me", to: "users#show"
     post "/login", to: "sessions#create"
     delete "/logout", to: "sessions#destroy"
-   
+   get "/names", to: "products#search"
 
     resources :products
     resources :purchases, only: [:index, :show, :create]

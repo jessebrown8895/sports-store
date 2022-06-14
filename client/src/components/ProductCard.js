@@ -5,7 +5,7 @@ import PurchaseProduct from './PurchaseProduct';
 import Button from '../styles/Button';
 import Box from '../styles/Box';
 const ProductCard = ({product, user, setPrada, setUser}) => {
-  
+  // const [filteredNames, setFilteredNames] = useState(null)
   const history = useHistory()
   // const [productObj, setProductObj] = useState(product)
   
@@ -23,11 +23,8 @@ const ProductCard = ({product, user, setPrada, setUser}) => {
       history.push(`/products/${product.id}/edit`)
     }
    
-  // const handleUpdate = (updateProductObj) => {
-  //   console.log(updateProductObj)
-  //   setPrada(origPradas => origPradas.concat(updateProductObj));
-  // }
- 
+  
+  
   return (
     <div>
       <Box key={product.id}>
@@ -46,7 +43,6 @@ const ProductCard = ({product, user, setPrada, setUser}) => {
         )}
         {user && product.creator.id !== user.id && (
           <PurchaseProduct
-            
             setPrada={setPrada}
             setUser={setUser}
             product={product}
@@ -54,7 +50,8 @@ const ProductCard = ({product, user, setPrada, setUser}) => {
           />
         )}
       </Box>
-    </div>
+      </div>
+   
   );
 };
 

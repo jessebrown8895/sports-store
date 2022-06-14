@@ -7,4 +7,6 @@ class Product < ApplicationRecord
   def total_users
     self.users.uniq.length
   end 
+
+  
 end

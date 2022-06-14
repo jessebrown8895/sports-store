@@ -32,7 +32,16 @@ class Api::ProductsController < ApplicationController
             end
         end 
     end
-
+    
+    def search
+        name = params[:name]
+        results = Product.where("name LIKE ?", "%#{name.titleize}%")
+        render json: results
+    end 
+# def search
+#   term = params[:search_term]
+#   @results = BlogPost.where("lower(title) LIKE ?", "%#{search_term.downcase}%")
+# end
     private 
     
     def product_params 
