@@ -28,10 +28,20 @@ const ProductList = ({ pradas, user, getCurrentUser, setPrada, setUser }) => {
   useEffect(() => {
     handleSubmit();
   }, [names]);
-  return <div>
-    <input type="text" onChange={e => setNames(e.target.value)} value={names} />
-    {renderProduct}
-    </div>;
+  return (
+    <div>
+      <div>
+        <option value={names}>Search product </option>
+        <input
+        Search
+          type="text"
+          onChange={(e) => setNames(e.target.value)}
+          value={names}
+        />
+      </div>
+      {renderProduct}
+    </div>
+  );
 };
 
 export default ProductList
